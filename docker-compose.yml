@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  pedidos:
+    build: ./pedidos
+    ports:
+      - "3001:3000"
+    environment:
+      SERVICE_NAME: pedidos
+
+  pagamentos:
+    build: ./pagamentos
+    ports:
+      - "3002:3000"
+    environment:
+      SERVICE_NAME: pagamentos
+
+  estoque:
+    build: ./estoque
+    ports:
+      - "3003:3000"
+    environment:
+      SERVICE_NAME: estoque
+
+  gateway:
+    build: ./gateway
+    ports:
+      - "8080:3000"
+    depends_on:
+      - pedidos
+      - pagamentos
+      - estoque
